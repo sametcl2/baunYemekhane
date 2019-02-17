@@ -27,7 +27,7 @@ public class Pazartesi extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager manager;
-    static ArrayList<String> arrayList=new ArrayList<>();
+    ArrayList<String> arrayList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,11 +46,9 @@ public class Pazartesi extends Fragment {
         Document doc;
         Elements elements;
         Element element;
-        Elements al;
         String title;
-        String yemek;
-        Elements strong;
         Elements elementss;
+        Elements strong;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -80,8 +78,10 @@ public class Pazartesi extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             MainActivity.toolbar.setTitle(title);
-            for (int i=0; i<4; i++){
-                arrayList.add(strong.get(i).text());
+            if(arrayList.size()==0){
+                for (int i=0; i<4; i++){
+                    arrayList.add(strong.get(i).text());
+                }
             }
             mAdapter=new Adapter(arrayList);
             recyclerView.setAdapter(mAdapter);
