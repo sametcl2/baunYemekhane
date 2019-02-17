@@ -27,7 +27,7 @@ public class Pazartesi extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager manager;
-    TextView textView2;
+    static ArrayList<String> arrayList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,33 +38,38 @@ public class Pazartesi extends Fragment {
         recyclerView.setLayoutManager(manager);
         Fetch fetch=new Fetch();
         fetch.execute();
-        textView2=view.findViewById(R.id.textView2);
         return view;
     }
 
     class Fetch extends AsyncTask<Void,Void,Void> {
         ProgressDialog progressDialog;
         Document doc;
+        Elements elements;
         Element element;
-        Elements elementt;
         Elements al;
         String title;
         String yemek;
-        ArrayList<String> arrayList;
+        Elements strong;
+        Elements elementss;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setTitle("Yemekler");
+            progressDialog.setMessage("Yemek Bilgileri Çekiliyor...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void...voids) {
             try {
                 doc=Jsoup.connect("http://www.balikesir.edu.tr/baun/yemek_listesi").get();
-                title=doc.select("h3").first().toString();
-                element=doc.select("tr").get(1);
-                elementt=element.select("td");
-                al=elementt.select("strong");
+                title=doc.select("h3").first().text();
+                elements=doc.select("table");
+                element=elements.select("tr").last();
+                elementss=element.select("td");
+                strong=elementss.select("strong");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,15 +79,15 @@ public class Pazartesi extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            textView2.setText(title);
-            for (Element element: al){
-                arrayList.add(element.text());
+            MainActivity.toolbar.setTitle(title);
+            for (int i=0; i<4; i++){
+                arrayList.add(strong.get(i).text());
             }
             mAdapter=new Adapter(arrayList);
             recyclerView.setAdapter(mAdapter);
+            progressDialog.dismiss();
         }
     }
-
 }
 class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
 
