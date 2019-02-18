@@ -28,6 +28,7 @@ public class Pazartesi extends Fragment {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager manager;
     ArrayList<String> arrayList=new ArrayList<>();
+    static Elements strong;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class Pazartesi extends Fragment {
         Element element;
         String title;
         Elements elementss;
-        Elements strong;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -82,6 +83,7 @@ public class Pazartesi extends Fragment {
                 for (int i=0; i<4; i++){
                     arrayList.add(strong.get(i).text());
                 }
+                System.out.println("hello");
             }
             mAdapter=new Adapter(arrayList);
             recyclerView.setAdapter(mAdapter);

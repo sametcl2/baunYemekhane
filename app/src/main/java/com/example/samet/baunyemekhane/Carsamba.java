@@ -25,7 +25,7 @@ public class Carsamba extends Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager manager;
-    ArrayList<String> cArrayList;
+    ArrayList<String> cArrayList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,38 +34,14 @@ public class Carsamba extends Fragment {
         recyclerView.setHasFixedSize(true);
         manager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-        cArrayList=new ArrayList<>();
+        if(cArrayList.size()==0){
+            for(int i=0; i<4; i++)
+                cArrayList.add(Pazartesi.strong.get(i+8).text());
+        }
+        adapter=new Adapter3(cArrayList);
+        recyclerView.setAdapter(adapter);
         return view;
 
-    }
-    class Fetch extends AsyncTask<Void,Void, Void>{
-        Elements elements;
-        Element element;
-        String title;
-        Elements elementss;
-        Elements strong;
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            for (int i=0; i<4; i++)
-                cArrayList.add(strong.get(i+12).text());
-            adapter=new Adapter3(cArrayList);
-            recyclerView.setAdapter(adapter);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Document doc=Jsoup.connect("http://www.balikesir.edu.tr/baun/yemek_listesi").get();
-                elements=doc.select("table");
-                element=elements.select("tr").last();
-                elementss=element.select("td");
-                strong=elementss.select("strong");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }
 class Adapter3 extends RecyclerView.Adapter<Adapter3.Holder>{
