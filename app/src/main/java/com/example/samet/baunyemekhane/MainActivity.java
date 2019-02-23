@@ -1,5 +1,7 @@
 package com.example.samet.baunyemekhane;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     static Toolbar toolbar;
-
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +46,22 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        floatingActionButton=findViewById(R.id.fab);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v,"AYLIK LISTE",Snackbar.LENGTH_LONG).setAction("GOSTER", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.balikesir.edu.tr/dosyalar/yemek_listesi2.pdf"));
+                        startActivity(intent);
+                    }
+                }).show();
+            }
+        });
 
         setupPager(mViewPager);
-
     }
     public void setupPager(ViewPager viewPager){
         SectionsPagerAdapter adapter=new SectionsPagerAdapter(getSupportFragmentManager());
