@@ -31,6 +31,7 @@ public class Cuma extends Fragment {
             for (int i=0; i<4; i++){
                 carrayList.add(Pazartesi.strong.get(i+16).text());
             }
+            carrayList.add(Pazartesi.elementss.get(4).ownText());
         }
         adapter=new Adapter5(carrayList);
         recyclerView.setAdapter(adapter);

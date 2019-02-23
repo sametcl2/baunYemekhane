@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,7 +31,11 @@ public class Pazartesi extends Fragment {
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager manager;
     ArrayList<String> arrayList=new ArrayList<>();
+    ArrayList<String> arrayList2=new ArrayList<>();
     static Elements strong;
+    static Elements icerik;
+    static Elements elementss;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +57,8 @@ public class Pazartesi extends Fragment {
         Elements elements;
         Element element;
         String title;
-        Elements elementss;
+
+
 
         @Override
         protected void onPreExecute() {
@@ -72,6 +79,8 @@ public class Pazartesi extends Fragment {
                 element=elements.select("tr").last();
                 elementss=element.select("td");
                 strong=elementss.select("strong");
+                icerik=elementss.select("i");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,6 +95,9 @@ public class Pazartesi extends Fragment {
                 for (int i=0; i<4; i++){
                     arrayList.add(strong.get(i).text());
                 }
+                arrayList.add(elementss.get(0).ownText());
+                for(int i=0; i<4; i++)
+                    arrayList2.add(icerik.get(i).text());
             }
             mAdapter=new Adapter(arrayList);
             recyclerView.setAdapter(mAdapter);
@@ -93,6 +105,7 @@ public class Pazartesi extends Fragment {
         }
     }
 }
+
 class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
 
     ArrayList<String> arrayListe;
@@ -118,7 +131,7 @@ class Adapter extends RecyclerView.Adapter<Adapter.Holder>{
         return arrayListe.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder{
+    class Holder extends RecyclerView.ViewHolder {
         TextView textView;
         public Holder(@NonNull View itemView) {
             super(itemView);

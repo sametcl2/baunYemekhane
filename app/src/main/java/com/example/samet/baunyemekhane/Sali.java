@@ -67,6 +67,7 @@ public class Sali extends Fragment {
             if(sArrayList.size()==0){
                 for(int i=0; i<4; i++)
                     sArrayList.add(strong.get(i+4).text());
+                sArrayList.add(elementss.get(1).ownText());
             }
             adapter=new Adapter2(sArrayList);
             recyclerView.setAdapter(adapter);

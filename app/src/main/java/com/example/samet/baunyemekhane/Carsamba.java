@@ -38,6 +38,7 @@ public class Carsamba extends Fragment {
         if(cArrayList.size()==0){
             for(int i=0; i<4; i++)
                 cArrayList.add(Pazartesi.strong.get(i+8).text());
+            cArrayList.add(Pazartesi.elementss.get(2).ownText());
         }
         adapter=new Adapter3(cArrayList);
         recyclerView.setAdapter(adapter);

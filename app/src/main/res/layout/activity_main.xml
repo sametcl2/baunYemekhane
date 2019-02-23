@@ -67,7 +67,9 @@
         android:layout_height="55dp"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:pressedTranslationZ="@dimen/activity_horizontal_margin"
+        app:elevation="@dimen/activity_vertical_margin"
+        app:hoveredFocusedTranslationZ="6px"
+        app:pressedTranslationZ="@android:dimen/app_icon_size"
         app:srcCompat="@drawable/icon" />
 
 </android.support.design.widget.CoordinatorLayout>

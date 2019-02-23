@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="293dp"
-        android:layout_height="60dp"
+        android:layout_width="268dp"
+        android:layout_height="62dp"
         android:layout_marginTop="16dp"
+        android:layout_weight="1"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:textSize="24sp"

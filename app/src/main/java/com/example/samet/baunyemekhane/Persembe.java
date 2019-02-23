@@ -31,6 +31,7 @@ public class Persembe extends Fragment {
         if(parrayList.size()==0){
             for (int i=0; i<4; i++)
                 parrayList.add(Pazartesi.strong.get(i+12).text());
+            parrayList.add(Pazartesi.elementss.get(3).ownText());
         }
         adapter=new Adapter4(parrayList);
         recyclerView.setAdapter(adapter);
