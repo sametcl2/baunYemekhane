@@ -1,1 +1,1 @@
-Okuduğum üniversite olan Balıeksir Üniversitesi'nin yemekhanesindeki yemekleri gösteren bir android uygulaması.
+Balıkesir Üniversitesi kampüs yemekhanesindeki günlük, haftalık ve aylık yemek listelerini gösteren bir android uygulaması.
